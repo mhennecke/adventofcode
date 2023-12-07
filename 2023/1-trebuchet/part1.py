@@ -2,7 +2,7 @@ import os
 import re
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-input_file = os.path.join(script_dir, f'{os.path.basename(__file__).split(".")[0]}.input')
+input_file = os.path.join(script_dir, 'input')
 
 
 def valve_value(s: str) -> int:

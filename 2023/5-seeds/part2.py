@@ -2,8 +2,8 @@ import os
 import math
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-input_file = os.path.join(script_dir, f'{os.path.basename(__file__).split(".")[0]}.input')
-test_input_file = os.path.join(script_dir, f'{os.path.basename(__file__).split(".")[0]}.test.input')
+input_file = os.path.join(script_dir, 'input')
+test_input_file = os.path.join(script_dir, 'test.input')
 
 
 def read_data(file_name: str) -> tuple[list[tuple[int, int]], dict[list[tuple[int, int, int]]]]:

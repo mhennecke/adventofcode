@@ -4,11 +4,11 @@ from functools import cmp_to_key
 from collections import Counter
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-input_file = os.path.join(script_dir, f'{os.path.basename(__file__).split(".")[0]}.input')
-test_input_file = os.path.join(script_dir, f'{os.path.basename(__file__).split(".")[0]}.test.input')
+input_file = os.path.join(script_dir, 'input')
+test_input_file = os.path.join(script_dir, 'test.input')
 
 
-card_order = "AKQT98765432J"
+card_order = "AKQJT98765432"
 card_pos = {c: p for (p, c) in enumerate(card_order)}
 
 
@@ -47,15 +47,6 @@ def hand_type(hand: str) -> float:
     # 1: One pair, where two cards share one label, and the other three cards have a different label from the pair and each other: A23A4
     # 0: High card, where all cards' labelslabels are distinct: 23456
 
-    temp_hand = hand.replace('J', '')
-    temp_cards = Counter(temp_hand)
-    best_replacement = temp_cards.most_common(1)
-    if best_replacement:
-        hand = hand.replace('J', best_replacement[0][0])
-    else:
-        # all Jacks
-        pass
-
     cards = Counter(hand)
     top_cards = cards.most_common(2)
     occ = top_cards[0][1]
@@ -85,12 +76,12 @@ def total_bids(hands: list[tuple[str, int]]) -> int:
 
 test_data = read_data(test_input_file)
 assert hand_type(test_data[0][0]) == 1
-assert hand_type(test_data[1][0]) == 4
+assert hand_type(test_data[1][0]) == 3
 assert hand_type(test_data[2][0]) == 2
-assert hand_type(test_data[3][0]) == 4
-assert hand_type(test_data[4][0]) == 4
+assert hand_type(test_data[3][0]) == 2
+assert hand_type(test_data[4][0]) == 3
 assert hand_type('JJJJJ') == 5
-assert hand_type('3J3JJ') == 5
+assert hand_type('3J3JJ') == 3.5
 assert hand_type('22422') == 4
 assert compare_hands(('25J4J', 0), ('Q3QQ4', 0)) < 0
 assert compare_hands(('22K2K', 0), ('Q3QQ4', 0)) > 0
@@ -100,10 +91,9 @@ assert compare_hands(('JJJJJ', 0), ('Q3QQ4', 0)) > 0
 assert compare_hands(('33332', 0), ('2AAAA', 0)) > 0
 assert compare_hands(('77888', 0), ('77788', 0)) > 0
 assert compare_hands(('23456', 0), ('23457', 0)) < 0
-assert compare_hands(('J4444', 0), ('8JJJJ', 0)) < 0
-assert compare_hands(('J4444', 0), ('KJJJJ', 0)) < 0
+assert compare_hands(('J4444', 0), ('8JJJJ', 0)) > 0
 
-assert total_bids(test_data) == 5905
+assert total_bids(test_data) == 6440
 
 data = read_data(input_file)
 print(total_bids(data))
