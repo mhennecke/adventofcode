@@ -9,7 +9,7 @@ def divisors(n):
 target_presents = 34000000
 i = 1
 while True:
-    p_i = 10 * sum([d for d in divisors(i)])
+    p_i = 11 * sum([d for d in divisors(i) if i <= d * 50])
     if p_i >= target_presents:
         break
     i += 1
