@@ -2,3 +2,4 @@ adventofcode.code-workspace
 .flake8
 .DS_Store
 .envrc
+*input*
