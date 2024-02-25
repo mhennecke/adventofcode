@@ -3,3 +3,4 @@ adventofcode.code-workspace
 .DS_Store
 .envrc
 *input*
+venv
